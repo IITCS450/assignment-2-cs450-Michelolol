@@ -25,32 +25,3 @@ int main(void){
 }
 
 
-int setpriority(int pid, int prio){
-  /*Failure conditions:
-• PID not found among non-UNUSED processes
-• Priority outside allowed range
-• System call argument parsing fails*/
-  struct proc *p;
-  int found = 0;
-  if (prio < 0 || prio > 2){
-    return -1;
-  }
-
-  for(p = proc; p < &proc[NPROC]; p++) {
-    acquire(&p->lock);
-    if(p->pid == pid && p->state != unused){
-        p-> priority = prio;
-        found = 1;
-        release(&p->lock);
-        break;
-    }
-  release(&p->lock);
-  }
-  if (found){
-    return 0;
-  }else{
-    return -1;
-  }
-
-
-}//end of setprio
