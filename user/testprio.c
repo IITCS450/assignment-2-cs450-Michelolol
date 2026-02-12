@@ -26,5 +26,17 @@ int main(void){
 
 
 int setpriority(int pid, int prio){
-  exit();
+  /*Failure conditions:
+• PID not found among non-UNUSED processes
+• Priority outside allowed range
+• System call argument parsing fails*/
+  struct proc *p;
+  int found = 0;
+  if (prio < 0 || prio > 2){
+    return -1;
+  }
+
+  
+return 0; //success
+return -1; //failure
 }
