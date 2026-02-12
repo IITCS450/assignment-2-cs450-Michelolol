@@ -23,3 +23,8 @@ int main(void){
   printf(1, "testprio: done\n");
   exit();
 }
+
+
+int setpriority(int pid, int prio){
+  exit();
+}
