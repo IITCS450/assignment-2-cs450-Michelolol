@@ -36,7 +36,21 @@ int setpriority(int pid, int prio){
     return -1;
   }
 
-  
-return 0; //success
-return -1; //failure
-}
+  for(p = proc; p < &proc[NPROC]; p++) {
+    acquire(&p->lock);
+    if(p->pid == pid && p->state != unused){
+        p-> priority = prio;
+        found = 1;
+        release(&p->lock);
+        break;
+    }
+  release(&p->lock);
+  }
+  if (found){
+    return 0;
+  }else{
+    return -1;
+  }
+
+
+}//end of setprio
